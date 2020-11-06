@@ -57,20 +57,7 @@ public class LogMaskingConverter extends LogEventPatternConverter {
     private String mask(String message) {
         Matcher matcher = null;
         StringBuffer buffer = new StringBuffer();
-
-//        matcher = CREDIT_CARD_PATTERN.matcher(message);
-//        maskMatcher(matcher, buffer,CAREDIT_CARD_REPLACEMENT_REGEX);
-//        message=buffer.toString();
-//        buffer.setLength(0);
-//
-//        matcher = SSN_PATTERN.matcher(message);
-//        maskMatcher(matcher, buffer,SSN_REPLACEMENT_REGEX);
-//        message=buffer.toString();
-//        buffer.setLength(0);
-//
-//        matcher = CVV_PATTERN.matcher(message);
-//        maskMatcher(matcher, buffer,CVV_REPLACEMENT_REGEX);
-
+        
         matcher = SVC_NO_PATTERN.matcher(message);
         maskMatcherRegrex(matcher, buffer, SVC_NO_REPLACEMENT_REGEX);
         message = buffer.toString();
@@ -105,10 +92,9 @@ public class LogMaskingConverter extends LogEventPatternConverter {
 ## Step#2 Create Log4j2.xml and put under \src\main\resources
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30" packages="com.singtel.data.sponsor">
+<Configuration status="WARN" monitorInterval="30" packages="com.my.package.logger">
     <Properties>
         <Property name="LOG_PATTERN">
-<!--            %d{yyyyMMdd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %spi%n-->
             [%d] [%p] [%t] [$${bundle:application:spring.application.name}] [%c{1.}] %spi%n
         </Property>
     </Properties>
